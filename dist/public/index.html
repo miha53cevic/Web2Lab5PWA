@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>MojDiktafon PWA</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper blue">
+                <a href="/" class="brand-logo">
+                    <i class="material-icons" style="font-size: 40px;">graphic_eq</i>
+                    MojDiktafon
+                </a>
+                <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="add.html"><i class="material-icons">add</i></a></li>
+                    <li><a href="/"><i class="material-icons">refresh</i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <ul class="sidenav" id="sidenav">
+            <li><a href="add.html"><i class="material-icons">add</i>Dodaj novi zapis</a></li>
+            <li><a href="./"><i class="material-icons">refresh</i>Osvježi</a></li>
+        </ul>
+    </header>
+    <main class="container">
+        <div class="section">
+            <h3>Audio zapisi</h3>
+        </div>
+        <div class="divider"></div>
+    </main>
+    <footer class="page-footer blue darken-4 fixed">
+        <div class="footer-copyright">
+            <div class="container right-align">
+                © 2023 Mihael Petričević
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+    </script>
+    <script>
+        // Aktiviraj service workera
+        navigator.serviceWorker.register('./serviceWorker.js')
+            .then(swreg => console.log(swreg))
+            .catch(err => console.log(err)); 
+    </script>
+</body>
+
+</html>
