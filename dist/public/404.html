@@ -24,14 +24,14 @@
                 </a>
                 <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons">home</i></a></li>
                     <li><a href="add.html"><i class="material-icons">add</i></a></li>
-                    <li><a href="/"><i class="material-icons">refresh</i></a></li>
                 </ul>
             </div>
         </nav>
         <ul class="sidenav" id="sidenav">
+            <li><a href="./"><i class="material-icons">home</i>Moji audio zapisi</a></li>
             <li><a href="add.html"><i class="material-icons">add</i>Dodaj novi zapis</a></li>
-            <li><a href="./"><i class="material-icons">refresh</i>Osvježi</a></li>
         </ul>
     </header>
     <main class="container">
@@ -49,12 +49,6 @@
         $(document).ready(function () {
             $('.sidenav').sidenav();
         });
-    </script>
-    <script>
-        // Aktiviraj service workera
-        navigator.serviceWorker.register('./serviceWorker.js')
-            .then(swreg => console.log(swreg))
-            .catch(err => console.log(err)); 
     </script>
 </body>
 
