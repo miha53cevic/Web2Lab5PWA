@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon .",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "serve": "npm run build && npm run start"
   },
   "author": "miha53cevic",
   "license": "MIT",
