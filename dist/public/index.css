@@ -51,3 +51,16 @@ main {
     flex-direction: column;
     align-items: center;
 }
+
+#audioZapisi {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.audioZapis {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}

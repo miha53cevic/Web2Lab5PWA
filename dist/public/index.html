@@ -39,6 +39,22 @@
             <h3>Audio zapisi</h3>
         </div>
         <div class="divider"></div>
+        <ul id="audioZapisi"></ul>
+        <div id="loading">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="page-footer blue darken-4 fixed">
         <div class="footer-copyright">
@@ -53,12 +69,13 @@
             $('.sidenav').sidenav();
         });
     </script>
-    <script>
+    <script defer>
         // Aktiviraj service workera
-        navigator.serviceWorker.register('./serviceWorker.js')
+        navigator.serviceWorker.register('./serviceWorker.js', { type: "module" })
             .then(swreg => console.log(swreg))
             .catch(err => console.log(err)); 
     </script>
+    <script src="./index.js" defer type="module"></script>
 </body>
 
 </html>
