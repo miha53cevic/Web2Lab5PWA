@@ -8,6 +8,14 @@
     "orientation": "portrait",
     "scope": ".",
     "start_url": "/index.html",
+    "prefer_related_applications": true,
+    "related_applications": [
+        {
+            "platform": "webapp",
+            "url": "https://web2lab5pwa-cv5r.onrender.com/",
+            "id": "com.render.web2lab5pwa"
+        }
+    ],
     "screenshots": [
         {
             "src": "icons/windows11/Wide310x150Logo.scale-400.png",
