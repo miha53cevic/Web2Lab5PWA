@@ -78,7 +78,7 @@ $('#addForm').on('submit', async (ev) => {
     // Spremi u IndexDB
     const timestamp = new Date().toISOString();
     const id = `${timestamp}-${naziv}`;
-    set(id, {
+    await set(id, {
         naziv: naziv,
         audioBlob: audioBlob,
     });

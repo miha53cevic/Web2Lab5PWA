@@ -94,6 +94,7 @@ async function NetworkFirst(request) {
 async function SyncSaveAudio() {
     // Upload na server api
     entries().then((entries) => {
+        console.log(entries);
         for (const entry of entries) {
             const key = entry[0];
             const value = entry[1];
@@ -142,3 +143,45 @@ self.addEventListener("sync", function (event) {
         event.waitUntil(SyncSaveAudio());
     }
 });
+
+self.addEventListener("notificationclick", function (event) {
+    const notification = event.notification;
+    console.log("notification", notification);
+    event.waitUntil(
+        clients.matchAll().then(function (clis) {
+            clis.forEach((client) => {
+                client.navigate(notification.data.redirectUrl);
+                client.focus();
+            });
+            notification.close();
+        })
+    );
+});
+
+self.addEventListener("notificationclose", function (event) {
+    console.log("notificationclose", event);
+});
+
+self.addEventListener("push", function (event) {
+    console.log("push event", event);
+
+    let data = { title: "title", body: "body", redirectUrl: "/" };
+
+    if (event.data) {
+        data = JSON.parse(event.data.text());
+    }
+
+    const options = {
+        body: data.body,
+        icon: "icons/android/android-launchericon-96-96.png",
+        badge: "icons/android/android-launchericon-96-96.png",
+        vibrate: [200, 100, 200, 100, 200, 100, 200],
+        data: {
+            redirectUrl: data.redirectUrl,
+        },
+    };
+
+    event.waitUntil(self.registration.showNotification(data.title, options));
+});
+
+

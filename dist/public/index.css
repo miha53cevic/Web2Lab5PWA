@@ -64,3 +64,10 @@ main {
     gap: 1rem;
     align-items: center;
 }
+
+#extraToolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+}
