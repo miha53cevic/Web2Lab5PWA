@@ -5,10 +5,14 @@ const cachableResources = [
     "/",
     "index.html",
     "404.html",
+    "add.html",
     "index.css",
     "logo.png",
     "manifest.json",
     "offline.html",
+    "index.js",
+    "add.js",
+    "/api/audio",
     "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
     "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js",
     "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js",
@@ -65,10 +69,12 @@ async function StaleWhileRevalidate(request) {
             await cache.put(request.url, networkResponse.clone());
             return networkResponse;
         } catch (err) {
-            console.error(err);
-            console.log(request.url);
-            // Ako request ne prolazi vrati offline.html
-            return await caches.match('offline.html');
+            //console.error(err);
+            //console.log(request.url);
+            // Ako request ne prolazi vrati offline.html za html datoteke
+            if (request.url.endsWith('.html')) return await caches.match('offline.html');
+            // Suprotno baci grešku
+            //throw Error("Nije moguće obraditi zatražen zahtjev", request);
         }
     }
 }
@@ -86,8 +92,10 @@ async function NetworkFirst(request) {
         // Ako network request nije uspio vrati cache
         const cachedResponse = await caches.match(request);
         if (cachedResponse) return cachedResponse;
-        // Ako nemamo ni cache a network ne radi vrati da smo offline
-        return await caches.match('offline.html');
+        // Ako nemamo ni cache a network ne radi vrati da smo offline za html datoteke
+        if (request.url.endsWith('.html')) return await caches.match('offline.html');
+        // Suprotno baci grešku
+        //throw Error("Nije moguće obraditi zatražen zahtjev", request);
     }
 }
 

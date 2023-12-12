@@ -57,7 +57,7 @@ async function setupPushSubscription() {
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(publicKey)
             });
-            const res = await fetch("/saveSubscription", {
+            const res = await fetch("/api/saveSubscription", {
                 method: "POST", headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
@@ -66,6 +66,10 @@ async function setupPushSubscription() {
             if (res.ok) {
                 $('#notificationButton').children().eq(0).addClass('green-text text-darken-4');
                 console.log("Notifications Subscribed");
+            } else {
+                alert('Greška kod pretplate, pokušajte kasnije...');
+                // Makni pretplatu
+                await sub.unsubscribe();
             }
         } else { 
             alert("You are already subscribed"); 
@@ -73,7 +77,11 @@ async function setupPushSubscription() {
             $('#notificationButton').children().eq(0).addClass('green-text text-darken-4');
         }
     } catch (error) {
-        console.log(error);
+        alert("Trenutno nije moguće pretplatiti se na obavijesti, pokušajte kasnije...");
+        // Makni pretplatu
+        const reg = await navigator.serviceWorker.ready;
+        let sub = await reg.pushManager.getSubscription();
+        if (sub) await sub.unsubscribe();
     }
 }
 

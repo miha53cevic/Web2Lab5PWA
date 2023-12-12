@@ -52,7 +52,7 @@ app.post('/api/audio', upload.single('audioBlob'), (req, res) => {
     });
 });
 
-app.post("/saveSubscription", (req, res) => {
+app.post("/api/saveSubscription", (req, res) => {
     const { sub } = req.body;
     console.log(sub);
     db.serialize(() => {
